@@ -1,0 +1,11 @@
+CREATE TABLE epfiles (line STRING);
+
+LOAD DATA LOCAL INPATH 'episodeIV_dialouges.txt' INTO TABLE epfiles;
+LOAD DATA LOCAL INPATH 'episodeV_dialouges.txt' INTO TABLE epfiles;
+LOAD DATA LOCAL INPATH 'episodeVI_dialouges.txt' INTO TABLE epfiles;
+
+CREATE TABLE dialouge_count AS
+SELECT name, count(1) AS count FROM
+(SELECT split(line, '\t')[0] AS name FROM epfiles) n
+GROUP BY n.name
+ORDER BY count DESC;

@@ -1,0 +1,9 @@
+CREATE TABLE episodeIV (line STRING);
+
+LOAD DATA LOCAL INPATH '/root/episodeIV_dialouges.txt' INTO TABLE episodeIV;
+
+INSERT OVERWRITE DIRECTORY 'hdfs:///user/root/outputs/episodeIVoutput'
+SELECT COUNT(*) FROM episodeIV WHERE INSTR(line, 'Luke')>0;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/home/M4/Assignment'
+SELECT COUNT(*) FROM episodeIV WHERE INSTR(line, 'Luke')>0;
